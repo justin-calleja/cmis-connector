@@ -38,34 +38,12 @@ public class CreateDocumentByIdTestCases extends CMISTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testCreateDocumentById_payload_is_String() {
+	public void testCreateDocumentById() {
 		try {
 			ObjectId result = createDocumentById(lookupFlowConstruct("create-document-by-id"),
 					rootFolderId(),
 					(String) testObjects.get("filename"),
 					(String) testObjects.get("contentRef"),
-					(String) testObjects.get("mimeType"),
-					(VersioningState) testObjects.get("versioningState"),
-					(String) testObjects.get("objectType"),
-					(Map<String, Object>) testObjects.get("propertiesRef"));
-
-			assertNotNull(result);
-			testObjects.put("objectId", result.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	@Category({ SmokeTests.class, RegressionTests.class })
-	@Test
-	public void testCreateDocumentById_assert_content_ref_attrib_is_valid() {
-		try {
-			ObjectId result = createDocumentById(lookupFlowConstruct("create-document-by-id-content-ref"),
-					rootFolderId(),
-					(String) testObjects.get("filename"),
-					testObjects,
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),

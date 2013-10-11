@@ -172,20 +172,13 @@ public class CMISTestParent extends FunctionalTestCase {
 		testObjects.put("objectType", objectType);
 		testObjects.put("propertiesRef", propertiesRef);
 		
-//		MuleEvent event = getTestEvent(payload);
-		
-//		for(String key : testObjects.keySet()) {
-//			event.setSessionVariable(key, testObjects.get(key));
-//		}
-		
-//		MuleEvent response = flow.process(event);
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (ObjectId) response.getMessage().getPayload();
 	}
 	
 	protected ObjectId createDocumentByIdFromContent(String folderId, String filename, Object payload, String mimeType, 
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef) throws Exception {
-		return createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id"), folderId, filename, payload, mimeType, 
+		return createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content"), folderId, filename, payload, mimeType, 
 				versioningState, objectType, propertiesRef);
 	}
 	

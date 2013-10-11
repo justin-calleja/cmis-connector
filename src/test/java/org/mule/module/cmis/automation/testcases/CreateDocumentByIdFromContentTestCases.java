@@ -28,7 +28,7 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 	public void setUp() {
 		try {
 			testObjects = (HashMap<String, Object>) context
-					.getBean("createDocumentById");
+					.getBean("createDocumentByIdFromContent");
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -38,7 +38,7 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testCreateDocumentById() {
+	public void testCreateDocumentByIdFromContent() {
 		try {
 			ObjectId result = createDocumentByIdFromContent(rootFolderId(),
 					(String) testObjects.get("filename"),
@@ -55,13 +55,13 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 			fail();
 		}
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testCreateDocumentById_no_properties() {
+	public void testCreateDocumentByIdFromContent_no_properties() {
 		try {
-			ObjectId result = createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-no-properties"),
+			ObjectId result = createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content-no-properties"),
 					rootFolderId(),
 					(String) testObjects.get("filename"),
 					(String) testObjects.get("contentRef"),

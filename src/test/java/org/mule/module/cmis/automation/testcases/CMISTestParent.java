@@ -160,15 +160,16 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (List<Folder>) response.getMessage().getPayload();
 	}
 	
-	protected ObjectId createDocumentById(String folderId, String filename, Object payload, String mimeType, 
+	protected ObjectId createDocumentById(String folderId, String filename, String contentRef, String mimeType, 
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef) throws Exception {
-		return createDocumentById(lookupFlowConstruct("create-document-by-id"), folderId, filename, payload, mimeType, versioningState, objectType, propertiesRef);
+		return createDocumentById(lookupFlowConstruct("create-document-by-id"), folderId, filename, contentRef, mimeType, versioningState, objectType, propertiesRef);
 	}
 	
-	protected ObjectId createDocumentById(MessageProcessor flow, String folderId, String filename, Object payload, String mimeType, 
+	protected ObjectId createDocumentById(MessageProcessor flow, String folderId, String filename, String contentRef, String mimeType, 
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef) throws Exception {
 		testObjects.put("folderId", folderId);
 		testObjects.put("filename", filename);
+		testObjects.put("contentRef", contentRef);
 		testObjects.put("mimeType", mimeType);
 		testObjects.put("versioningState", versioningState);
 		testObjects.put("objectType", objectType);
@@ -247,23 +248,14 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (ObjectId) response.getMessage().getPayload();
 	}
 	
-	protected List<String> deleteTree(Object payload, String folderId, Boolean allversions, Boolean continueOnFailure) throws Exception {
-		return deleteTree(lookupFlowConstruct("delete-tree-session-vars"), payload, folderId, allversions, continueOnFailure);
-	}
-	
 	@SuppressWarnings("unchecked")
-	protected List<String> deleteTree(MessageProcessor flow, Object payload, String folderId, Boolean allversions, Boolean continueOnFailure) throws Exception {
+	protected List<String> deleteTree(MessageProcessor flow, String folderId, CmisObject folderRef, Boolean allversions, Boolean continueOnFailure) throws Exception {
 		testObjects.put("folderId", folderId);
+		testObjects.put("folderRef", folderRef);
 		testObjects.put("allversions", allversions);
 		testObjects.put("continueOnFailure", continueOnFailure);
 		
-		MuleEvent event = getTestEvent(payload);
-		
-		for(String key : testObjects.keySet()) {
-			event.setSessionVariable(key, testObjects.get(key));
-		}
-		
-		MuleEvent response = flow.process(event);
+		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (List<String>) response.getMessage().getPayload();
 	}
 	

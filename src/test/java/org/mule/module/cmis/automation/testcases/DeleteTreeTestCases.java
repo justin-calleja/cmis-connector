@@ -38,14 +38,15 @@ public class DeleteTreeTestCases extends CMISTestParent {
 			String folderId = folderObjectId.getId();
 
 			createDocumentById(folderId, (String) testObjects.get("filename"),
-					(String) testObjects.get("content"),
+					(String) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),
 					(Map<String, Object>) testObjects.get("propertiesRef"));
 
 			testObjects.put("folderId", folderId);
-			testObjects.put("folderRef", getObjectById(folderId));
+			CmisObject folderRef = getObjectById(folderId);
+			testObjects.put("folderRef", folderRef);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -54,28 +55,12 @@ public class DeleteTreeTestCases extends CMISTestParent {
 
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testDeleteTree() {
-		try {
-			List<String> objectsFailedToDelete = deleteTree((CmisObject) testObjects.get("folderRef"),
-					(String) testObjects.get("folderId"),
-					(Boolean) testObjects.get("allversions"),
-					(Boolean) testObjects.get("continueOnFailure"));
-			assertNotNull(objectsFailedToDelete);
-			assertEquals(0, objectsFailedToDelete.size());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	@Category({ SmokeTests.class, RegressionTests.class })
-	@Test
-	public void testDeleteTree_HashMap_payload_no_folder_ref_attribute() {
+	public void testDeleteTree_no_folder_ref() {
 		try {
 			List<String> objectsFailedToDelete = deleteTree(
-					lookupFlowConstruct("delete-tree-payload-no-folder-ref"),
-					testObjects,
+					lookupFlowConstruct("delete-tree-no-folder-ref"),
 					(String) testObjects.get("folderId"),
+					(CmisObject) testObjects.get("folderRef"),
 					(Boolean) testObjects.get("allversions"),
 					(Boolean) testObjects.get("continueOnFailure"));
 			assertNotNull(objectsFailedToDelete);
@@ -88,12 +73,11 @@ public class DeleteTreeTestCases extends CMISTestParent {
 	
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testDeleteTree_assert_folder_ref_attribute_is_valid() {
+	public void testDeleteTree_with_folder_ref() {
 		try {
-			List<String> objectsFailedToDelete = deleteTree(
-					lookupFlowConstruct("delete-tree-payload-with-folder-ref"),
-					testObjects,
+			List<String> objectsFailedToDelete = deleteTree(lookupFlowConstruct("delete-tree-with-folder-ref"),
 					(String) testObjects.get("folderId"),
+					(CmisObject) testObjects.get("folderRef"),
 					(Boolean) testObjects.get("allversions"),
 					(Boolean) testObjects.get("continueOnFailure"));
 			assertNotNull(objectsFailedToDelete);

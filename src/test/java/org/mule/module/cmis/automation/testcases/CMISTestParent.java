@@ -141,6 +141,7 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (Acl) response.getMessage().getPayload();
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected List<Folder> getParentFolders(String objectId) throws Exception {
 		testObjects.put("objectId", objectId);
 		
@@ -149,6 +150,7 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (List<Folder>) response.getMessage().getPayload();
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected List<Folder> getParentFolders(String objectId, Object cmisObjectRef) throws Exception {
 		testObjects.put("objectId", objectId);
 		testObjects.put("cmisObjectRef", cmisObjectRef);
@@ -211,13 +213,7 @@ public class CMISTestParent extends FunctionalTestCase {
 		testObjects.put("propertiesRef", propertiesRef);
 		testObjects.put("force", force);
 		
-		MuleEvent event = getTestEvent(payload);
-		
-		for(String key : testObjects.keySet()) {
-			event.setSessionVariable(key, testObjects.get(key));
-		}
-		
-		MuleEvent response = flow.process(event);
+		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (ObjectId) response.getMessage().getPayload();
 	}
 	
@@ -237,13 +233,7 @@ public class CMISTestParent extends FunctionalTestCase {
 		testObjects.put("propertiesRef", propertiesRef);
 		testObjects.put("force", force);
 		
-		MuleEvent event = getTestEvent(payload);
-		
-		for(String key : testObjects.keySet()) {
-			event.setSessionVariable(key, testObjects.get(key));
-		}
-		
-		MuleEvent response = flow.process(event);
+		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (ObjectId) response.getMessage().getPayload();
 	}
 	

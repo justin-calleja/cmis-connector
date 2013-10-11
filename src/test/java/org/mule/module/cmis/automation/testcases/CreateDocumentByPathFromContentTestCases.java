@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Folder;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.junit.After;
@@ -48,9 +47,7 @@ public class CreateDocumentByPathFromContentTestCases extends CMISTestParent {
 	public void testCreateDocumentByPathFromContent_rootPath() {
 		testObjects.put("folderPath", "/");
 		try {
-			ObjectId result = createDocumentByPathFromContent(
-					lookupFlowConstruct("create-document-by-path-from-content"),
-					(String) testObjects.get("folderPath"),
+			ObjectId result = createDocumentByPathFromContent((String) testObjects.get("folderPath"),
 					(String) testObjects.get("filename"),
 					(String) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
@@ -73,9 +70,7 @@ public class CreateDocumentByPathFromContentTestCases extends CMISTestParent {
 	public void testCreateDocumentByPathFromContent_nonRootPath() {
 		testObjects.put("folderPath", "/" + TEST_FOLDER_NAME);
 		try {
-			ObjectId result = createDocumentByPathFromContent(
-					lookupFlowConstruct("create-document-by-path-from-content"),
-					(String) testObjects.get("folderPath"),
+			ObjectId result = createDocumentByPathFromContent((String) testObjects.get("folderPath"),
 					(String) testObjects.get("filename"),
 					(String) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
@@ -87,7 +82,6 @@ public class CreateDocumentByPathFromContentTestCases extends CMISTestParent {
 			assertNotNull(result);
 			String objectId = result.getId();
 			testObjects.put("objectId", objectId);
-//			CmisObject cmisObject = getObjectById(objectId);
 			List<Folder> folders = getParentFolders(objectId);
 
 			assertTrue(folders.size() == 1);
@@ -104,36 +98,10 @@ public class CreateDocumentByPathFromContentTestCases extends CMISTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testCreateDocumentByPathFromContent_assert_content_ref_attrib_is_valid() {
-		testObjects.put("folderPath", "/");
-		try {
-			ObjectId result = createDocumentByPathFromContent(
-					lookupFlowConstruct("create-document-by-path-from-content-content-ref"),
-					(String) testObjects.get("folderPath"),
-					(String) testObjects.get("filename"),
-					testObjects,
-					(String) testObjects.get("mimeType"),
-					(VersioningState) testObjects.get("versioningState"),
-					(String) testObjects.get("objectType"),
-					(Map<String, Object>) testObjects.get("propertiesRef"),
-					(Boolean) testObjects.get("force"));
-
-			assertNotNull(result);
-			testObjects.put("objectId", result.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Category({ SmokeTests.class, RegressionTests.class })
-	@Test
 	public void testCreateDocumentByPathFromContent_no_properties() {
 		testObjects.put("folderPath", "/");
 		try {
-			ObjectId result = createDocumentByPathFromContent(
-					lookupFlowConstruct("create-document-by-path-from-content-no-properties"),
+			ObjectId result = createDocumentByPathFromContent(lookupFlowConstruct("create-document-by-path-from-content-no-properties"),
 					(String) testObjects.get("folderPath"),
 					(String) testObjects.get("filename"),
 					(String) testObjects.get("contentRef"),

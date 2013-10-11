@@ -28,7 +28,7 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 	public void setUp() {
 		try {
 			testObjects = (HashMap<String, Object>) context
-					.getBean("createDocumentByIdFromContent");
+					.getBean("createDocumentById");
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -38,34 +38,11 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testCreateDocumentByIdFromContent_payload_is_String() {
+	public void testCreateDocumentById() {
 		try {
-			ObjectId result = createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content"),
-					rootFolderId(),
+			ObjectId result = createDocumentByIdFromContent(rootFolderId(),
 					(String) testObjects.get("filename"),
 					(String) testObjects.get("contentRef"),
-					(String) testObjects.get("mimeType"),
-					(VersioningState) testObjects.get("versioningState"),
-					(String) testObjects.get("objectType"),
-					(Map<String, Object>) testObjects.get("propertiesRef"));
-
-			assertNotNull(result);
-			testObjects.put("objectId", result.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Category({ SmokeTests.class, RegressionTests.class })
-	@Test
-	public void testCreateDocumentByIdFromContent_assert_content_ref_attrib_is_valid() {
-		try {
-			ObjectId result = createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content-content-ref"),
-					rootFolderId(),
-					(String) testObjects.get("filename"),
-					testObjects,
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),
@@ -82,9 +59,9 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 	@SuppressWarnings("unchecked")
 	@Category({SmokeTests.class, RegressionTests.class})
 	@Test
-	public void testCreateDocumentByIdFromContent_no_properties() {
+	public void testCreateDocumentById_no_properties() {
 		try {
-			ObjectId result = createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content-no-properties"),
+			ObjectId result = createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-no-properties"),
 					rootFolderId(),
 					(String) testObjects.get("filename"),
 					(String) testObjects.get("contentRef"),

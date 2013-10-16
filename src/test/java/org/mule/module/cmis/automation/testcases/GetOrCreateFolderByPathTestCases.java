@@ -55,7 +55,7 @@ public class GetOrCreateFolderByPathTestCases extends CMISTestParent {
 	public void tearDown() {
 		try {
 			String folderId = (String) testObjects.get("folderId");
-			deleteTree(getObjectById(folderId), folderId, true, true);
+			deleteTreeByFolderId(folderId, true, true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

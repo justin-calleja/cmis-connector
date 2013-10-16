@@ -14,6 +14,7 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.junit.After;
 import org.junit.Before;
@@ -42,7 +43,7 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 		try {
 			ObjectId result = createDocumentByIdFromContent(rootFolderId(),
 					(String) testObjects.get("filename"),
-					(String) testObjects.get("contentRef"),
+					(Object) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),
@@ -64,7 +65,7 @@ public class CreateDocumentByIdFromContentTestCases extends CMISTestParent {
 			ObjectId result = createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content-no-properties"),
 					rootFolderId(),
 					(String) testObjects.get("filename"),
-					(String) testObjects.get("contentRef"),
+					(Object) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),

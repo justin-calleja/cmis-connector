@@ -49,7 +49,7 @@ public class CreateDocumentByPathTestCases extends CMISTestParent {
 		try {
 			ObjectId result = createDocumentByPath((String) testObjects.get("folderPath"),
 					(String) testObjects.get("filename"),
-					(String) testObjects.get("contentRef"),
+					(Object) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),
@@ -72,7 +72,7 @@ public class CreateDocumentByPathTestCases extends CMISTestParent {
 		try {
 			ObjectId result = createDocumentByPath((String) testObjects.get("folderPath"),
 					(String) testObjects.get("filename"),
-					(String) testObjects.get("contentRef"),
+					(Object) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),
@@ -106,7 +106,7 @@ public class CreateDocumentByPathTestCases extends CMISTestParent {
 					lookupFlowConstruct("create-document-by-path-no-properties"),
 					(String) testObjects.get("folderPath"),
 					(String) testObjects.get("filename"),
-					(String) testObjects.get("contentRef"),
+					(Object) testObjects.get("contentRef"),
 					(String) testObjects.get("mimeType"),
 					(VersioningState) testObjects.get("versioningState"),
 					(String) testObjects.get("objectType"),

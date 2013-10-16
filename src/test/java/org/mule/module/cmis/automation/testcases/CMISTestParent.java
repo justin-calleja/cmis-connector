@@ -160,12 +160,12 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (List<Folder>) response.getMessage().getPayload();
 	}
 	
-	protected ObjectId createDocumentById(String folderId, String filename, String contentRef, String mimeType, 
+	protected ObjectId createDocumentById(String folderId, String filename, Object contentRef, String mimeType, 
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef) throws Exception {
 		return createDocumentById(lookupFlowConstruct("create-document-by-id"), folderId, filename, contentRef, mimeType, versioningState, objectType, propertiesRef);
 	}
 	
-	protected ObjectId createDocumentById(MessageProcessor flow, String folderId, String filename, String contentRef, String mimeType, 
+	protected ObjectId createDocumentById(MessageProcessor flow, String folderId, String filename, Object contentRef, String mimeType, 
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef) throws Exception {
 		testObjects.put("folderId", folderId);
 		testObjects.put("filename", filename);
@@ -179,16 +179,17 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (ObjectId) response.getMessage().getPayload();
 	}
 	
-	protected ObjectId createDocumentByIdFromContent(String folderId, String filename, Object payload, String mimeType, 
+	protected ObjectId createDocumentByIdFromContent(String folderId, String filename, Object contentRef, String mimeType, 
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef) throws Exception {
-		return createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content"), folderId, filename, payload, mimeType, 
+		return createDocumentByIdFromContent(lookupFlowConstruct("create-document-by-id-from-content"), folderId, filename, contentRef, mimeType, 
 				versioningState, objectType, propertiesRef);
 	}
 	
-	protected ObjectId createDocumentByIdFromContent(MessageProcessor flow, String folderId, String filename, Object payload, String mimeType, 
+	protected ObjectId createDocumentByIdFromContent(MessageProcessor flow, String folderId, String filename, Object contentRef, String mimeType, 
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef) throws Exception {
 		testObjects.put("folderId", folderId);
 		testObjects.put("filename", filename);
+		testObjects.put("contentRef", contentRef);
 		testObjects.put("mimeType", mimeType);
 		testObjects.put("versioningState", versioningState);
 		testObjects.put("objectType", objectType);
@@ -198,16 +199,17 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (ObjectId) response.getMessage().getPayload();
 	}
 	
-	protected ObjectId createDocumentByPath(String folderPath, String filename, Object payload, String mimeType,
+	protected ObjectId createDocumentByPath(String folderPath, String filename, Object contentRef, String mimeType,
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef, Boolean force) throws Exception {
-		return createDocumentByPath(lookupFlowConstruct("create-document-by-path"), folderPath, filename, payload, mimeType,
+		return createDocumentByPath(lookupFlowConstruct("create-document-by-path"), folderPath, filename, contentRef, mimeType,
 				versioningState, objectType, propertiesRef, force);
 	}
 	
-	protected ObjectId createDocumentByPath(MessageProcessor flow, String folderPath, String filename, Object payload, String mimeType,
+	protected ObjectId createDocumentByPath(MessageProcessor flow, String folderPath, String filename, Object contentRef, String mimeType,
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef, Boolean force) throws Exception {
 		testObjects.put("folderPath", folderPath);
 		testObjects.put("filename", filename);
+		testObjects.put("contentRef", contentRef);
 		testObjects.put("mimeType", mimeType);
 		testObjects.put("versioningState", versioningState);
 		testObjects.put("objectType", objectType);
@@ -218,16 +220,17 @@ public class CMISTestParent extends FunctionalTestCase {
 		return (ObjectId) response.getMessage().getPayload();
 	}
 	
-	protected ObjectId createDocumentByPathFromContent(String folderPath, String filename, Object payload, String mimeType,
+	protected ObjectId createDocumentByPathFromContent(String folderPath, String filename, Object contentRef, String mimeType,
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef, Boolean force) throws Exception {
 		return createDocumentByPathFromContent(lookupFlowConstruct("create-document-by-path-from-content"), folderPath,
-				filename, payload, mimeType, versioningState, objectType, propertiesRef, force);
+				filename, contentRef, mimeType, versioningState, objectType, propertiesRef, force);
 	}
 	
-	protected ObjectId createDocumentByPathFromContent(MessageProcessor flow, String folderPath, String filename, Object payload, String mimeType,
+	protected ObjectId createDocumentByPathFromContent(MessageProcessor flow, String folderPath, String filename, Object contentRef, String mimeType,
 			VersioningState versioningState, String objectType, Map<String, Object> propertiesRef, Boolean force) throws Exception {
 		testObjects.put("folderPath", folderPath);
 		testObjects.put("filename", filename);
+		testObjects.put("contentRef", contentRef);
 		testObjects.put("mimeType", mimeType);
 		testObjects.put("versioningState", versioningState);
 		testObjects.put("objectType", objectType);
@@ -249,12 +252,23 @@ public class CMISTestParent extends FunctionalTestCase {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected List<String> deleteTree(MessageProcessor flow, String folderId, CmisObject folderRef, Boolean allversions, Boolean continueOnFailure) throws Exception {
+	protected List<String> deleteTreeByFolderId(String folderId, Boolean allversions, Boolean continueOnFailure) throws Exception {
 		testObjects.put("folderId", folderId);
+		testObjects.put("allversions", allversions);
+		testObjects.put("continueOnFailure", continueOnFailure);
+		
+		MessageProcessor flow = lookupFlowConstruct("delete-tree-by-folder-id");
+		MuleEvent response = flow.process(getTestEvent(testObjects));
+		return (List<String>) response.getMessage().getPayload();
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected List<String> deleteTreeByFolderRef(CmisObject folderRef, Boolean allversions, Boolean continueOnFailure) throws Exception {
 		testObjects.put("folderRef", folderRef);
 		testObjects.put("allversions", allversions);
 		testObjects.put("continueOnFailure", continueOnFailure);
 		
+		MessageProcessor flow = lookupFlowConstruct("delete-tree-by-folder-ref");
 		MuleEvent response = flow.process(getTestEvent(testObjects));
 		return (List<String>) response.getMessage().getPayload();
 	}

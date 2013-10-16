@@ -48,6 +48,7 @@ public class ApplyAspectTestCases extends CMISTestParent {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Category({RegressionTests.class})
 	@Test
 	public void testApplyAspect() {
@@ -59,7 +60,7 @@ public class ApplyAspectTestCases extends CMISTestParent {
 			testObjects.put("propertiesRef", aspectProperties);
 			
 			MessageProcessor flow = lookupFlowConstruct("apply-aspect");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			flow.process(getTestEvent(testObjects));
 			
 			// We are using alfresco, so type cast it specifically to an alfresco document
 			AlfrescoDocument document = (AlfrescoDocument) getObjectById(objectId);

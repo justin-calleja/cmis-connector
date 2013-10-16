@@ -8,14 +8,10 @@
 
 package org.mule.module.cmis.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisObjectNotFoundException;
 import org.junit.Before;
@@ -49,7 +45,8 @@ public class DeleteTestCases extends CMISTestParent {
 			
 			delete(objectId, allVersions);			
 			
-			CmisObject deletedObject = getObjectById(objectId);
+			// expect getObjectById to throw exception
+			getObjectById(objectId);
 			fail("Object should not have been found");
 		} catch (Exception e) {
 			if (!(e.getCause() instanceof CmisObjectNotFoundException)) {
@@ -69,7 +66,8 @@ public class DeleteTestCases extends CMISTestParent {
 			
 			delete(objectId, cmisObjectRef, allVersions);
 
-			CmisObject deletedObject = getObjectById(objectId);
+			// expect getObjectById to throw exception
+			getObjectById(objectId);
 			fail("Object should not have been found");
 		} catch (Exception e) {
 			if (!(e.getCause() instanceof CmisObjectNotFoundException)) {

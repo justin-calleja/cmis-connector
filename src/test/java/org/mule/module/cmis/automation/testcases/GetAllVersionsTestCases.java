@@ -40,10 +40,10 @@ public class GetAllVersionsTestCases extends CMISTestParent {
 			VersioningState versioningState = (VersioningState) testObjects.get("versioningState");
 			String objectType = (String) testObjects.get("objectType");
 			Boolean force = (Boolean) testObjects.get("force");
-			String content = (String) testObjects.get("content");
+			String contentRef = (String) testObjects.get("contentRef");
 			Map<String, Object> properties = (Map<String, Object>) testObjects.get("propertiesRef");
 
-			ObjectId documentId = createDocumentByPathFromContent(folderPath, filename, content, mimeType, versioningState, objectType, properties, force);
+			ObjectId documentId = createDocumentByPathFromContent(folderPath, filename, contentRef, mimeType, versioningState, objectType, properties, force);
 			testObjects.put("documentId", documentId);
 			
 			List<HashMap<String, Object>> versions = (List<HashMap<String, Object>>) testObjects.get("versions");

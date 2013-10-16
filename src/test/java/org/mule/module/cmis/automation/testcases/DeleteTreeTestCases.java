@@ -55,12 +55,9 @@ public class DeleteTreeTestCases extends CMISTestParent {
 
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testDeleteTree_no_folder_ref() {
+	public void testDeleteTree_by_folder_id() {
 		try {
-			List<String> objectsFailedToDelete = deleteTree(
-					lookupFlowConstruct("delete-tree-no-folder-ref"),
-					(String) testObjects.get("folderId"),
-					(CmisObject) testObjects.get("folderRef"),
+			List<String> objectsFailedToDelete = deleteTreeByFolderId((String) testObjects.get("folderId"),
 					(Boolean) testObjects.get("allversions"),
 					(Boolean) testObjects.get("continueOnFailure"));
 			assertNotNull(objectsFailedToDelete);
@@ -73,11 +70,9 @@ public class DeleteTreeTestCases extends CMISTestParent {
 	
 	@Category({ SmokeTests.class, RegressionTests.class })
 	@Test
-	public void testDeleteTree_with_folder_ref() {
+	public void testDeleteTree_by_folder_ref() {
 		try {
-			List<String> objectsFailedToDelete = deleteTree(lookupFlowConstruct("delete-tree-with-folder-ref"),
-					(String) testObjects.get("folderId"),
-					(CmisObject) testObjects.get("folderRef"),
+			List<String> objectsFailedToDelete = deleteTreeByFolderRef((CmisObject) testObjects.get("folderRef"),
 					(Boolean) testObjects.get("allversions"),
 					(Boolean) testObjects.get("continueOnFailure"));
 			assertNotNull(objectsFailedToDelete);

@@ -13,7 +13,6 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
-import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.apache.chemistry.opencmis.commons.data.Acl;
 import org.junit.After;

@@ -8,7 +8,6 @@
 
 package org.mule.module.cmis.automation.testcases;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.apache.chemistry.opencmis.client.api.Relationship;
 import org.junit.After;
@@ -93,7 +91,7 @@ public class GetObjectRelationshipsTestCases extends CMISTestParent {
 	public void tearDown() {
 		try {
 			String folderId = (String) testObjects.get("folderId");
-			deleteTree(getObjectById(folderId), folderId, true, true);
+			deleteTreeByFolderId(folderId, true, true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

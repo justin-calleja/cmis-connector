@@ -18,7 +18,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.module.cmis.VersioningState;
 
@@ -54,7 +53,7 @@ public class ApplyPolicyTestCases extends CMISTestParent {
 			testObjects.put("objectId", documentId);
 			
 			MessageProcessor flow = lookupFlowConstruct("apply-policy");
-			MuleEvent response = flow.process(getTestEvent(testObjects));
+			flow.process(getTestEvent(testObjects));
 			
 			fail("Perform assertions once exception is fixed");
 		} catch (Exception e) {

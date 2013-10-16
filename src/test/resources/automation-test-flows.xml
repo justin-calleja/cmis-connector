@@ -115,14 +115,14 @@ http://www.mulesoft.org/schema/mule/cmis http://www.mulesoft.org/schema/mule/cmi
 		<cmis:get-all-versions config-ref="CMIS" documentId="#[payload.documentId]"/>
 	</flow>
 	
-	<flow name="delete-tree-no-folder-ref">
+	<flow name="delete-tree-by-folder-id">
 		<cmis:delete-tree config-ref="CMIS" allversions="#[payload.allversions]" 
 			continueOnFailure="#[payload.continueOnFailure]" folderId="#[payload.folderId]" />
 	</flow>
 	
-	<flow name="delete-tree-with-folder-ref">
+	<flow name="delete-tree-by-folder-ref">
 		<cmis:delete-tree config-ref="CMIS" allversions="#[payload.allversions]" 
-			continueOnFailure="#[payload.continueOnFailure]" folderId="#[payload.folderId]" folder-ref="#[payload.folderRef]" />
+			continueOnFailure="#[payload.continueOnFailure]" folder-ref="#[payload.folderRef]" />
 	</flow>
 	
 	<flow name="get-type-definition">

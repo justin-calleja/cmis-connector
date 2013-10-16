@@ -24,6 +24,7 @@ import org.mule.module.cmis.VersioningState;
 
 public class CheckInTestCases extends CMISTestParent {
 
+	@SuppressWarnings("unchecked")
 	@Before
 	public void setUp() {
 		try {

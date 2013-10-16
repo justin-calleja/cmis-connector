@@ -150,7 +150,7 @@
 		<entry key="mimeType" value="text/plain;charset=UTF-8" />
 		<entry key="versioningState" value="#{T(org.mule.module.cmis.VersioningState).MAJOR}" />
 		<entry key="objectType" value="D:cmiscustom:document" />
-		<entry key="content" value="Unmodified content" />
+		<entry key="contentRef" value="Unmodified content" />
 		<entry key="force" value="#{T(java.lang.Boolean).TRUE}" />
 		<entry key="propertiesRef">
 			<map key-type="java.lang.String" value-type="java.lang.Object">

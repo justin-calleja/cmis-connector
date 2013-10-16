@@ -91,7 +91,7 @@ public class FolderTestCases extends CMISTestParent {
 	@After
 	public void tearDown() {
 		try {
-			deleteTree(null, (String) testObjects.get("folderId"), true, true);
+			deleteTreeByFolderId((String) testObjects.get("folderId"), true, true);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
